@@ -75,9 +75,9 @@ const map = L.map("map", {
   scrollWheelZoom: true
 }).setView(DEFAULT_CENTER, DEFAULT_ZOOM);
 
-L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
   maxZoom: 19,
-  attribution: "Tiles &copy; Esri"
+  attribution: "Sources: Esri, Maxar, Earthstar Geographics, and the GIS User Community"
 }).addTo(map);
 
 L.control.zoom({ position: "bottomright" }).addTo(map);
