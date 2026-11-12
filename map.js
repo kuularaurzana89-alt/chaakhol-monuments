@@ -296,8 +296,11 @@ if (loginForm) {
     const password = document.getElementById("admin-password").value;
     setAdminStatus("Выполняется вход…");
     const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-    if (error) setAdminStatus("Не удалось войти. Проверьте почту и пароль.", true);
-  });
+    if (error) {
+  console.error("Ошибка входа:", error);
+  setAdminStatus("Ошибка входа: " + error.message, true);
+  return;
+});
 }
 
 if (logoutButton) {
