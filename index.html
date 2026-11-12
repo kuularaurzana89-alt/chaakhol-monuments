@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f2e9">
+  <title>Памятники Чаа-Хольского кожууна</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.2/Control.FullScreen.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="map-shell">
+    <div id="map" aria-label="Интерактивная карта памятников Чаа-Хольского кожууна"></div>
+
+    <header class="map-heading">
+      <div class="eyebrow">КУЛЬТУРНОЕ И АРХЕОЛОГИЧЕСКОЕ НАСЛЕДИЕ ТУВЫ</div>
+      <h1>Памятники<br>Чаа-Хольского кожууна</h1>
+      <p>Исследуйте места, хранящие историю долины Улуг-Хема.</p>
+      <div class="heading-rule"><span></span><span></span><span></span></div>
+    </header>
+
+    <aside class="map-guide" aria-label="Список памятников">
+      <div class="guide-top">
+        <div>
+          <span class="eyebrow">МАРШРУТ ПО ПАМЯТНИКАМ</span>
+          <h2>Объекты на карте</h2>
+        </div>
+        <span class="count" id="monument-count">10</span>
+      </div>
+      <p class="guide-note">Выберите памятник, чтобы открыть его описание. Точки появятся после добавления координат.</p>
+      <div class="monument-list" id="monument-list"></div>
+    </aside>
+
+    <button id="admin-toggle" class="admin-toggle" type="button">Добавить фото</button>
+    <section id="admin-panel" class="admin-panel" hidden aria-label="Управление фотографиями">
+      <div class="admin-panel-head">
+        <div><span class="eyebrow">УПРАВЛЕНИЕ ГАЛЕРЕЕЙ</span><h2>Фотографии памятников</h2></div>
+        <button class="panel-close" type="button" aria-label="Закрыть"
+          onclick="document.getElementById('admin-panel').hidden=true">×</button>
+      </div>
+      <p class="admin-intro">Войдите как администратор, чтобы добавить фотографию. Загруженные изображения будут видны всем посетителям.</p>
+      <form id="admin-login-form">
+        <label for="admin-email">Электронная почта администратора</label>
+        <input id="admin-email" type="email" autocomplete="username" required>
+        <label for="admin-password">Пароль</label>
+        <input id="admin-password" type="password" autocomplete="current-password" required>
+        <button class="admin-submit" type="submit">Войти</button>
+      </form>
+      <form id="admin-form" hidden>
+        <label for="photo-monument">Памятник</label>
+        <select id="photo-monument" required></select>
+        <label for="photo-file">Фотография (до 5 МБ)</label>
+        <input id="photo-file" type="file" accept="image/*" required>
+        <button class="admin-submit" type="submit">Загрузить фотографию</button>
+      </form>
+      <button id="admin-logout" class="admin-logout" type="button" hidden>Выйти из аккаунта</button>
+      <p id="admin-status" class="admin-status" role="status">Загрузка настроек…</p>
+    </section>
+    <div class="map-credit">КАРТА · OPENSTREETMAP</div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.2/Control.FullScreen.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>

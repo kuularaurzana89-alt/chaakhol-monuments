@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  --paper: #f5f2e9;
+  --ink: #202923;
+  --muted: #727a70;
+  --green: #52734d;
+  --line: rgba(47, 67, 49, .16);
+  --white: rgba(255, 255, 255, .94);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; }
+body { font-family: "DM Sans", Arial, sans-serif; color: var(--ink); }
+.map-shell { position: relative; width: 100%; height: 100%; min-height: 100dvh; overflow: hidden; background: var(--paper); }
+#map { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; background: #e9e8df; }
+
+/* Плавающие панели */
+.map-heading, .map-guide {
+  position: absolute; z-index: 500; background: var(--white);
+  border: 1px solid rgba(255,255,255,.8);
+  box-shadow: 0 12px 38px rgba(30, 43, 31, .13);
+  backdrop-filter: blur(12px);
+}
+.map-heading {
+  top: 22px; left: 22px; width: min(360px, calc(100vw - 44px));
+  padding: 22px 24px 19px; border-radius: 4px 22px 4px 22px;
+}
+.eyebrow { display: block; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .16em; line-height: 1.5; }
+.map-heading h1 {
+  margin: 9px 0 8px; font: 600 clamp(25px, 2.4vw, 34px)/1.08 "Playfair Display", Georgia, serif;
+  letter-spacing: -.025em;
+}
+.map-heading p { max-width: 270px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.heading-rule { display: flex; gap: 5px; margin-top: 16px; }
+.heading-rule span { display: block; height: 3px; width: 24px; background: #829b70; border-radius: 4px; }
+.heading-rule span:nth-child(2) { width: 10px; background: #c1a36a; }
+.heading-rule span:nth-child(3) { width: 5px; background: #d9d2bd; }
+
+.map-guide {
+  top: 22px; right: 22px; width: min(340px, calc(100vw - 44px));
+  max-height: calc(100dvh - 100px); display: flex; flex-direction: column;
+  padding: 20px 20px 14px; border-radius: 22px 4px 22px 4px;
+}
+.guide-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.guide-top h2 { margin: 5px 0 0; font: 600 21px/1.15 "Playfair Display", Georgia, serif; }
+.count { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #fff; background: var(--green); font-size: 13px; font-weight: 700; }
+.guide-note { margin: 11px 0 12px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.monument-list { overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; }
+.monument-item {
+  display: flex; align-items: flex-start; gap: 11px; width: 100%; padding: 11px 4px;
+  border: 0; border-top: 1px solid var(--line); background: transparent; text-align: left;
+  color: var(--ink); cursor: pointer; font: inherit;
+}
+.monument-item:hover, .monument-item:focus-visible { background: rgba(82,115,77,.07); outline: none; }
+.item-number { flex: 0 0 25px; height: 25px; display: grid; place-items: center; border: 1px solid #9eae91; border-radius: 50%; color: var(--green); font-size: 10px; font-weight: 700; }
+.item-title { display: block; font-size: 12px; line-height: 1.35; font-weight: 600; }
+.item-status { display: block; margin-top: 3px; color: #92988d; font-size: 9px; }
+.map-credit {
+  position: absolute; z-index: 400; bottom: 12px; left: 14px; padding: 5px 8px;
+  border-radius: 3px; background: rgba(255,255,255,.8); color: #647064;
+  font-size: 8px; letter-spacing: .12em;
+}
+
+/* Маркеры и окна */
+.custom-marker { display: grid; place-items: center; width: 30px; height: 30px; border: 3px solid #fff; border-radius: 50% 50% 50% 0; background: var(--green); box-shadow: 0 2px 10px #24351e55; transform: rotate(-45deg); }
+.custom-marker span { color: #fff; font-size: 10px; font-weight: 700; transform: rotate(45deg); }
+.leaflet-popup-content-wrapper { border-radius: 3px 16px 3px 16px; box-shadow: 0 8px 30px rgba(25,35,25,.2); }
+.leaflet-popup-content { max-width: 300px; width: min(300px, calc(100vw - 70px)); margin: 13px 15px; }
+.popup-card img { display: block; width: 100%; height: 150px; object-fit: cover; margin-bottom: 12px; border-radius: 2px 12px 2px 12px; background: #e8e7df; }
+.popup-card .popup-kicker { color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.popup-card h3 { margin: 5px 0 7px; font: 600 20px/1.15 "Playfair Display", Georgia, serif; }
+.popup-card p { margin: 0; color: #596158; font-size: 12px; line-height: 1.55; }
+.leaflet-control-zoom, .leaflet-control-fullscreen a { border: 0 !important; box-shadow: 0 3px 12px #24351e22 !important; }
+.leaflet-control-fullscreen a { background-color: #fff !important; }
+
+@media (max-width: 700px) {
+  .map-heading { top: 10px; left: 10px; width: calc(100vw - 20px); padding: 13px 16px 12px; border-radius: 4px 15px 4px 15px; }
+  .map-heading h1 { margin: 4px 0; font-size: 22px; }
+  .map-heading p { font-size: 10px; }
+  .heading-rule { margin-top: 8px; }
+  .map-guide { top: auto; bottom: 10px; left: 10px; right: 10px; width: auto; max-height: 37dvh; padding: 12px 14px 8px; border-radius: 15px 4px 15px 4px; }
+  .guide-top h2 { font-size: 17px; }
+  .guide-note { margin: 6px 0; font-size: 10px; }
+  .monument-item { padding: 8px 3px; }
+  .item-title { font-size: 11px; }
+  .map-credit { bottom: calc(37dvh + 17px); left: 12px; font-size: 7px; }
+  .leaflet-popup-content { max-width: 90vw; width: min(90vw, 340px); margin: 11px 12px; }
+  .popup-card img { height: 135px; }
+  .popup-card h3 { font-size: 18px; }
+  .popup-card p { font-size: 12px; }
+  .leaflet-top.leaflet-right { top: 135px; }
+}
+@media (min-width: 1500px) {
+  .map-heading { width: 440px; padding: 30px; }
+  .map-heading h1 { font-size: 42px; }
+  .map-heading p { font-size: 16px; }
+  .map-guide { width: 420px; padding: 28px; }
+  .guide-top h2 { font-size: 28px; }
+  .guide-note, .item-title { font-size: 15px; }
+  .item-status { font-size: 12px; }
+  .leaflet-popup-content { max-width: 420px; width: 420px; }
+  .popup-card img { height: 220px; }
+  .popup-card h3 { font-size: 27px; }
+  .popup-card p { font-size: 16px; }
+}
+
+/* Общая фотогалерея и панель администратора */
+.popup-gallery { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:11px; }
+.popup-gallery img { width:100%; height:116px; object-fit:cover; margin:0; border-radius:3px 9px 3px 9px; }
+.popup-gallery img:first-child:nth-last-child(odd) { grid-column:1 / -1; height:160px; }
+.photo-placeholder { display:grid; place-items:center; min-height:105px; margin-bottom:11px; padding:12px; background:#eeeee7; color:#7d8578; font-size:11px; text-align:center; border-radius:3px 12px 3px 12px; }
+.admin-toggle { position:absolute; z-index:600; right:22px; bottom:22px; border:0; border-radius:3px 13px 3px 13px; padding:12px 17px; background:#354f38; color:#fff; font:600 12px "DM Sans",sans-serif; box-shadow:0 5px 20px #24351e33; cursor:pointer; }
+.admin-panel { position:absolute; z-index:1000; top:50%; left:50%; transform:translate(-50%,-50%); width:min(420px,calc(100vw - 28px)); max-height:88dvh; overflow-y:auto; padding:22px; background:#fff; border-radius:4px 20px 4px 20px; box-shadow:0 18px 70px #17231755; }
+.admin-panel[hidden], #admin-form[hidden], #admin-login-form[hidden], #admin-logout[hidden] { display:none !important; }
+.admin-panel-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+.admin-panel h2 { margin:5px 0 0; font:600 23px "Playfair Display",Georgia,serif; }
+.panel-close { border:0; background:transparent; color:#687264; font-size:27px; cursor:pointer; }
+.admin-intro { color:#687264; font-size:12px; line-height:1.5; }
+.admin-panel label { display:block; margin:12px 0 5px; color:#4d594c; font-size:11px; font-weight:600; }
+.admin-panel input, .admin-panel select { width:100%; min-height:40px; padding:9px 10px; border:1px solid #d8ded4; border-radius:6px; background:#fff; color:#263126; font:13px "DM Sans",sans-serif; }
+.admin-submit, .admin-logout { width:100%; margin-top:14px; padding:12px; border:0; border-radius:6px; background:#52734d; color:#fff; font:600 12px "DM Sans",sans-serif; cursor:pointer; }
+.admin-logout { background:#ecefe9; color:#3c503b; }
+.admin-status { margin:12px 0 0; color:#62715e; font-size:11px; line-height:1.45; }
+.admin-status.error { color:#a33e32; }
+@media (max-width:700px) {
+  .admin-toggle { right:12px; bottom:calc(37dvh + 14px); padding:10px 13px; font-size:11px; }
+  .admin-panel { padding:17px; }
+  .popup-gallery img { height:100px; }
+}
