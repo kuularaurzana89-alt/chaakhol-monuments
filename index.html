@@ -32,7 +32,12 @@
       <p class="guide-note">Выберите памятник, чтобы открыть его описание. Точки появятся после добавления координат.</p>
       <div class="monument-list" id="monument-list"></div>
     </aside>
-
+<aside class="monument-details" id="monument-details" aria-label="Описание памятника" hidden>
+  <button class="details-close" id="details-close" type="button" aria-label="Закрыть описание">×</button>
+  <div id="monument-details-content">
+    <p>Выберите памятник на карте или в списке, чтобы прочитать его описание.</p>
+  </div>
+</aside>
     <button id="admin-toggle" class="admin-toggle" type="button">Добавить фото</button>
     <section id="admin-panel" class="admin-panel" hidden aria-label="Управление фотографиями">
       <div class="admin-panel-head">
