@@ -300,7 +300,7 @@ if (loginForm) {
   console.error("Ошибка входа:", error);
   setAdminStatus("Ошибка входа: " + error.message, true);
   return;
-});
+}});
 }
 
 if (logoutButton) {
