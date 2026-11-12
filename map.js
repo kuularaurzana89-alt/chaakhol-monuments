@@ -79,7 +79,11 @@ L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
   maxZoom: 19,
   attribution: "Sources: Esri, Maxar, Earthstar Geographics, and the GIS User Community"
 }).addTo(map);
-
+// Географические названия и границы поверх спутниковых снимков
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", {
+  maxZoom: 19,
+  attribution: "Labels &copy; Esri"
+}).addTo(map);
 L.control.zoom({ position: "bottomright" }).addTo(map);
 
 // API плагина leaflet.fullscreen: L.control.fullscreen()
